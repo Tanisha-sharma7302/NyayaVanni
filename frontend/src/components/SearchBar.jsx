@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Search, X } from 'lucide-react';
 
-export default function SearchBar({ onSearch, placeholder = 'Search conversations...' }) {
+export default function SearchBar({
+  onSearch,
+  placeholder = 'Search conversations...',
+}) {
   const [query, setQuery] = useState('');
   const [isFocused, setIsFocused] = useState(false);
 

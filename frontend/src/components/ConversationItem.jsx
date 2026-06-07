@@ -40,9 +40,7 @@ export default function ConversationItem({
   const handleDelete = (e) => {
     e.stopPropagation();
     if (
-      window.confirm(
-        `Are you sure you want to delete "${conversation.title}"?`
-      )
+      window.confirm(`Are you sure you want to delete "${conversation.title}"?`)
     ) {
       onDelete(conversation.id);
     }

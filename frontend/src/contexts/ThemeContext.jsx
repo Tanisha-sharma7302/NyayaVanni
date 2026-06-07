@@ -18,7 +18,9 @@ export const ThemeProvider = ({ children }) => {
       return stored;
     }
     // Detect system preference
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const systemPrefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
     return systemPrefersDark ? 'dark' : 'light';
   });
 
@@ -37,7 +39,9 @@ export const ThemeProvider = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, isDark: theme === 'dark' }}>
+    <ThemeContext.Provider
+      value={{ theme, toggleTheme, isDark: theme === 'dark' }}
+    >
       {children}
     </ThemeContext.Provider>
   );

@@ -1,19 +1,46 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronDown, ChevronUp, Clock, FileText, Trash2, AlertTriangle, CheckCircle, AlertCircle } from 'lucide-react';
+import {
+  ChevronDown,
+  ChevronUp,
+  Clock,
+  FileText,
+  Trash2,
+  AlertTriangle,
+  CheckCircle,
+  AlertCircle,
+} from 'lucide-react';
 
 const RISK_CONFIG = {
-  high:   { label: 'High Risk',   color: 'bg-red-500/20 text-red-400 border-red-500/30',    icon: AlertTriangle },
-  medium: { label: 'Medium Risk', color: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30', icon: AlertCircle },
-  low:    { label: 'Low Risk',    color: 'bg-green-500/20 text-green-400 border-green-500/30',  icon: CheckCircle },
-  unknown:{ label: 'Unknown',     color: 'bg-slate-500/20 text-slate-400 border-slate-500/30',  icon: FileText },
+  high: {
+    label: 'High Risk',
+    color: 'bg-red-500/20 text-red-400 border-red-500/30',
+    icon: AlertTriangle,
+  },
+  medium: {
+    label: 'Medium Risk',
+    color: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
+    icon: AlertCircle,
+  },
+  low: {
+    label: 'Low Risk',
+    color: 'bg-green-500/20 text-green-400 border-green-500/30',
+    icon: CheckCircle,
+  },
+  unknown: {
+    label: 'Unknown',
+    color: 'bg-slate-500/20 text-slate-400 border-slate-500/30',
+    icon: FileText,
+  },
 };
 
 function RiskBadge({ level }) {
   const config = RISK_CONFIG[level?.toLowerCase()] || RISK_CONFIG.unknown;
   const Icon = config.icon;
   return (
-    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs font-semibold ${config.color}`}>
+    <span
+      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs font-semibold ${config.color}`}
+    >
       <Icon className="w-3 h-3" />
       {config.label}
     </span>
@@ -23,7 +50,11 @@ function RiskBadge({ level }) {
 function formatDate(iso) {
   if (!iso) return '';
   const d = new Date(iso);
-  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  return d.toLocaleDateString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
 }
 
 export default function RecentDocuments({ history, onClear }) {
@@ -46,10 +77,11 @@ export default function RecentDocuments({ history, onClear }) {
             {history.length}
           </span>
         </div>
-        {open
-          ? <ChevronUp className="w-4 h-4 text-slate-400" />
-          : <ChevronDown className="w-4 h-4 text-slate-400" />
-        }
+        {open ? (
+          <ChevronUp className="w-4 h-4 text-slate-400" />
+        ) : (
+          <ChevronDown className="w-4 h-4 text-slate-400" />
+        )}
       </button>
 
       {/* List */}
@@ -69,9 +101,13 @@ export default function RecentDocuments({ history, onClear }) {
                 <div className="flex items-center gap-2 mt-1 flex-wrap">
                   <RiskBadge level={entry.riskLevel} />
                   {entry.fileType && (
-                    <span className="text-xs text-slate-500 uppercase">{entry.fileType}</span>
+                    <span className="text-xs text-slate-500 uppercase">
+                      {entry.fileType}
+                    </span>
                   )}
-                  <span className="text-xs text-slate-600">{formatDate(entry.analyzedAt)}</span>
+                  <span className="text-xs text-slate-600">
+                    {formatDate(entry.analyzedAt)}
+                  </span>
                 </div>
               </div>
             </button>
@@ -80,7 +116,10 @@ export default function RecentDocuments({ history, onClear }) {
           {/* Clear button */}
           <div className="px-5 py-3">
             <button
-              onClick={(e) => { e.stopPropagation(); onClear(); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                onClear();
+              }}
               className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-red-400 transition-colors"
             >
               <Trash2 className="w-3 h-3" />
